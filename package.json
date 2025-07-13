@@ -17,6 +17,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@shadcn/ui": "^0.0.4",
+    "@tailwindcss/postcss": "^4.1.11",
     "clsx": "^2.1.1",
     "daisyui": "^5.0.46",
     "firebase": "^11.10.0",
