@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ComingSoon from "./pages/ComingSoon";
 import NotesHub from "./pages/NotesHub";
+import CollegeBazaar from "./pages/CollegeBazaar";
 
 function AppRouter() {
   return (
