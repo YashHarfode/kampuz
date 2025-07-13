@@ -16,6 +16,7 @@ export default function NotesHub() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSemester, setSelectedSemester] = useState("all");
   const [selectedSubject, setSelectedSubject] = useState("all");
+  const [showBanner, setShowBanner] = useState(true);
 
   const semesters = ["1", "2", "3", "4", "5", "6", "7", "8"];
   const subjects = [
