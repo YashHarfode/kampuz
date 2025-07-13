@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Notes collection - authenticated users can read all, write their own
+    match /notes/{noteId} {
+      allow read: if true; // Anyone can read notes for educational sharing
+      allow write: if request.auth != null && request.auth.uid == resource.data.uploadedBy;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.uploadedBy;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.uploadedBy;
+    }
+    
+    // Marketplace collection - authenticated users can read all, write their own
+    match /marketplace/{itemId} {
+      allow read: if true; // Anyone can browse marketplace
+      allow write: if request.auth != null && request.auth.uid == resource.data.seller;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.seller;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.seller;
+    }
+    
+    // Events collection - authenticated users can read all, write their own
+    match /events/{eventId} {
+      allow read: if true; // Anyone can view events
+      allow write: if request.auth != null && request.auth.uid == resource.data.organizer;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.organizer;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.organizer;
+    }
+    
+    // Doubts collection - authenticated users can read all, write their own
+    match /doubts/{doubtId} {
+      allow read: if true; // Anyone can read doubts for learning
+      allow write: if request.auth != null && request.auth.uid == resource.data.askedBy;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.askedBy;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.askedBy;
+      
+      // Nested answers collection
+      match /answers/{answerId} {
+        allow read: if true; // Anyone can read answers
+        allow write: if request.auth != null && request.auth.uid == resource.data.answeredBy;
+        allow create: if request.auth != null && request.auth.uid == request.resource.data.answeredBy;
+        allow delete: if request.auth != null && request.auth.uid == resource.data.answeredBy;
+      }
+    }
+    
+    // Projects collection - authenticated users can read all, write their own
+    match /projects/{projectId} {
+      allow read: if true; // Anyone can view projects
+      allow write: if request.auth != null && request.auth.uid == resource.data.postedBy;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.postedBy;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.postedBy;
+      
+      // Nested applicants collection
+      match /applicants/{applicationId} {
+        allow read: if request.auth != null && 
+          (request.auth.uid == resource.data.uid || 
+           request.auth.uid == get(/databases/$(database)/documents/projects/$(projectId)).data.postedBy);
+        allow write: if request.auth != null && request.auth.uid == resource.data.uid;
+        allow create: if request.auth != null && request.auth.uid == request.resource.data.uid;
+        allow delete: if request.auth != null && request.auth.uid == resource.data.uid;
+      }
+    }
+  }
+}
