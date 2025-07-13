@@ -143,10 +143,13 @@ export const getNotes = async () => {
     }));
   } catch (error) {
     console.error("Error fetching notes:", error);
-    // If permissions error, return empty array instead of throwing
+    // If permissions error, return demo data instead of throwing
     if (
-      error.message.includes("permissions") ||
-      error.code === "permission-denied"
+      error.message?.includes("permissions") ||
+      error.message?.includes("Permission denied") ||
+      error.code === "permission-denied" ||
+      error.code === "unauthenticated" ||
+      error.name === "FirebaseError"
     ) {
       console.warn(
         "Firestore permissions not configured. Showing demo data. Please deploy Firestore rules.",
