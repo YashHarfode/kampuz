@@ -150,6 +150,16 @@ export const getMarketplaceListings = async (filters = {}) => {
       ...doc.data(),
     }));
   } catch (error) {
+    console.error("Error fetching marketplace listings:", error);
+    if (
+      error.message.includes("permissions") ||
+      error.code === "permission-denied"
+    ) {
+      console.warn(
+        "Firestore permissions not configured. Please deploy Firestore rules.",
+      );
+      return [];
+    }
     throw new Error("Failed to fetch listings: " + error.message);
   }
 };
