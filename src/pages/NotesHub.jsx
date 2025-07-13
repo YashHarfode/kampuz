@@ -8,6 +8,7 @@ import {
 import { AuthContext } from "../context/AuthContext";
 import UploadNotes from "./Notes/UploadNotes";
 import NotesList from "./Notes/NotesList";
+import FirebaseSetupBanner from "../components/FirebaseSetupBanner";
 
 export default function NotesHub() {
   const { user } = useContext(AuthContext);
