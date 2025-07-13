@@ -294,19 +294,10 @@ export const getEvents = async () => {
     }));
   } catch (error) {
     console.error("Error fetching events:", error);
-    if (
-      error.message?.includes("permissions") ||
-      error.message?.includes("Permission denied") ||
-      error.code === "permission-denied" ||
-      error.code === "unauthenticated" ||
-      error.name === "FirebaseError"
-    ) {
-      console.warn(
-        "Firestore permissions not configured. Showing demo data. Please deploy Firestore rules.",
-      );
-      return getDemoEvents();
-    }
-    throw new Error("Failed to fetch events: " + error.message);
+    console.warn(
+      "Firebase error occurred. Showing demo data. Please check Firebase configuration and deploy rules.",
+    );
+    return getDemoEvents();
   }
 };
 
