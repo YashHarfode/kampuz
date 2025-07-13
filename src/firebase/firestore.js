@@ -224,6 +224,16 @@ export const getEvents = async () => {
       ...doc.data(),
     }));
   } catch (error) {
+    console.error("Error fetching events:", error);
+    if (
+      error.message.includes("permissions") ||
+      error.code === "permission-denied"
+    ) {
+      console.warn(
+        "Firestore permissions not configured. Please deploy Firestore rules.",
+      );
+      return [];
+    }
     throw new Error("Failed to fetch events: " + error.message);
   }
 };
