@@ -19,10 +19,7 @@ function AppRouter() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/notes" element={<NotesHub />} />
-          <Route
-            path="/bazaar"
-            element={<ComingSoon feature="College Bazaar" />}
-          />
+          <Route path="/bazaar" element={<CollegeBazaar />} />
           <Route
             path="/events"
             element={<ComingSoon feature="Event Calendar" />}
