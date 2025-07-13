@@ -21,6 +21,88 @@ import {
 } from "firebase/storage";
 import { db, storage } from "./config";
 
+// ========== DEMO DATA FUNCTIONS ==========
+const getDemoNotes = () => [
+  {
+    id: "demo1",
+    title: "Data Structures and Algorithms - Chapter 1",
+    subject: "Computer Science",
+    semester: "3",
+    description:
+      "Introduction to arrays, linked lists, and basic sorting algorithms",
+    tags: ["arrays", "sorting", "algorithms"],
+    uploadedBy: "demo-user",
+    uploaderName: "Demo Student",
+    createdAt: { seconds: Date.now() / 1000 },
+    downloads: 25,
+    fileURL: "#",
+  },
+  {
+    id: "demo2",
+    title: "Calculus Notes - Derivatives",
+    subject: "Mathematics",
+    semester: "2",
+    description: "Complete notes on differentiation rules and applications",
+    tags: ["calculus", "derivatives", "math"],
+    uploadedBy: "demo-user-2",
+    uploaderName: "Math Helper",
+    createdAt: { seconds: (Date.now() - 86400000) / 1000 },
+    downloads: 42,
+    fileURL: "#",
+  },
+];
+
+const getDemoMarketplaceListings = () => [
+  {
+    id: "demo-item1",
+    title: "iPhone 12 Pro Max 128GB",
+    price: 45000,
+    category: "Electronics",
+    condition: "Good",
+    description: "Well maintained iPhone 12 Pro Max, minor scratches on back",
+    seller: "demo-seller",
+    sellerName: "John Doe",
+    contact: "+91 98765 43210",
+    createdAt: { seconds: Date.now() / 1000 },
+    views: 15,
+    status: "available",
+    imageURL: null,
+  },
+  {
+    id: "demo-item2",
+    title: "Data Structures Textbook",
+    price: 800,
+    category: "Books",
+    condition: "Like New",
+    description: "Latest edition, no markings, all pages intact",
+    seller: "demo-seller-2",
+    sellerName: "Alice Smith",
+    contact: "+91 87654 32109",
+    createdAt: { seconds: (Date.now() - 172800000) / 1000 },
+    views: 8,
+    status: "available",
+    imageURL: null,
+  },
+];
+
+const getDemoEvents = () => [
+  {
+    id: "demo-event1",
+    title: "Tech Talk: Future of AI",
+    description:
+      "Join us for an exciting discussion about artificial intelligence",
+    date: { seconds: (Date.now() + 604800000) / 1000 }, // 1 week from now
+    location: "Main Auditorium",
+    category: "Tech Talk",
+    organizer: "demo-organizer",
+    organizerName: "CS Department",
+    registrations: 45,
+    maxParticipants: 100,
+    registerLink: "https://example.com/register",
+    posterURL: null,
+  },
+];
+
 // ========== NOTES OPERATIONS ==========
 
 export const uploadNote = async (file, noteData) => {
