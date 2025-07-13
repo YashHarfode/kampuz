@@ -1,11 +1,11 @@
-// सबसे simple version
+import React from "react";
+import AppRouter from "./Router";
+import { AuthProvider } from "./context/AuthContext";
+
 export default function App() {
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-blue-600">
-        Welcome to Kampuz!
-      </h1>
-      <p>Your campus superapp is coming soon...</p>
-    </div>
-  )
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  );
 }
