@@ -237,8 +237,11 @@ export const getMarketplaceListings = async (filters = {}) => {
   } catch (error) {
     console.error("Error fetching marketplace listings:", error);
     if (
-      error.message.includes("permissions") ||
-      error.code === "permission-denied"
+      error.message?.includes("permissions") ||
+      error.message?.includes("Permission denied") ||
+      error.code === "permission-denied" ||
+      error.code === "unauthenticated" ||
+      error.name === "FirebaseError"
     ) {
       console.warn(
         "Firestore permissions not configured. Showing demo data. Please deploy Firestore rules.",
