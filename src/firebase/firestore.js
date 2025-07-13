@@ -60,6 +60,17 @@ export const getNotes = async () => {
       ...doc.data(),
     }));
   } catch (error) {
+    console.error("Error fetching notes:", error);
+    // If permissions error, return empty array instead of throwing
+    if (
+      error.message.includes("permissions") ||
+      error.code === "permission-denied"
+    ) {
+      console.warn(
+        "Firestore permissions not configured. Please deploy Firestore rules.",
+      );
+      return [];
+    }
     throw new Error("Failed to fetch notes: " + error.message);
   }
 };
