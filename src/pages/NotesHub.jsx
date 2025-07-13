@@ -63,6 +63,11 @@ export default function NotesHub() {
           )}
         </motion.div>
 
+        {/* Firebase Setup Banner */}
+        {showBanner && (
+          <FirebaseSetupBanner onDismiss={() => setShowBanner(false)} />
+        )}
+
         {/* Search and Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
